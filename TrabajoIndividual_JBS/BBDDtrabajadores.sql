@@ -1,15 +1,16 @@
-/*create database trabajadores;*/
-use trabajadores;
-
+ -- create database trabajadores;
+-- use trabajadores;
+-- drop database trabajadores;
+SET SQL_SAFE_UPDATES = 0;
 CREATE TABLE trabajador
 (
-    id         INT PRIMARY KEY,
+    id         INT PRIMARY KEY AUTO_INCREMENT,
     nombre     VARCHAR(45) NULL,
     puesto     VARCHAR(45) NULL,
     salario    INT NULL,
-    fecha_alta date null
+    fecha_alta DATE DEFAULT (CURDATE())
 
 );
 
-DELETE * FROM trabajador;
+DELETE FROM trabajador;
 

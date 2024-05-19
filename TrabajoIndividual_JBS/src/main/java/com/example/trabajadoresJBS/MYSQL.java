@@ -73,7 +73,7 @@ public class MYSQL {
             declaracion.setString(1, trabajador.getNombre());
             declaracion.setString(2, trabajador.getPuesto());
             declaracion.setInt(3, trabajador.getSalario());
-            declaracion.setString(4, trabajador.getId());
+            declaracion.setInt(4, trabajador.getId());
 
             // Ejecutar la consulta
             declaracion.executeUpdate();

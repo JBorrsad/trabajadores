@@ -46,6 +46,8 @@ public class Controlador {
     @FXML
     private ComboBox Puesto;
 
+    private LocalDate fechaAlta=LocalDate.now();
+
     @FXML
     public Trabajador crearTrabajador() {
         String nombre = txtFieldNombre.getText();
@@ -54,7 +56,8 @@ public class Controlador {
         System.out.println("Nombre: " + nombre);
         System.out.println("Puesto: " + puesto);
         System.out.println("Salario: " + salario);
-        return new Trabajador(nombre, puesto, salario);
+        System.out.println("Fecha de Alta: " + fechaAlta);
+        return new Trabajador(nombre, puesto, salario, fechaAlta);
     }
 
     public void anyadirEmpleados(Trabajador t) {
@@ -63,7 +66,7 @@ public class Controlador {
 
     private void mostrarAlerta(String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle("Información");
+        alerta.setTitle(null);
         alerta.setHeaderText(null);
         alerta.setContentText(mensaje);
         ButtonType botonAceptar = new ButtonType("Aceptar");
@@ -90,7 +93,7 @@ public class Controlador {
         anyadirEmpleados(nuevoTrabajador);
 
         MYSQL.insertarTrabajador(nuevoTrabajador);
-        mostrarAlerta("Trabajador creado correctamente. Presiona 'Aceptar' para volver a la pantalla principal.");
+        mostrarAlerta("Nuevo trabajador insertado correctamente.");
     }
 
     public void LeerTrabajadores() {
@@ -125,7 +128,7 @@ public class Controlador {
                 String nombre = tokens[0];
                 String cargo = tokens[1];
                 int salario = Integer.parseInt(tokens[2]);
-                return new Trabajador(nombre, cargo, salario);
+                return new Trabajador(nombre, cargo, salario,fechaAlta);
 
             } else {
                 System.err.println("Error al parsear línea: No hay suficientes elementos");
@@ -139,20 +142,29 @@ public class Controlador {
 
     @FXML
     public void clickrefrescar() {
+        // Limpiar la lista antes de cargar los datos nuevamente
         listViewTrabajadores.getItems().clear();
-        LeerTrabajadores();
+
+        // Leer los trabajadores solo si la lista está vacía
+        if (ListaTrabajadores.isEmpty()) {
+            LeerTrabajadores();
+        }
+
+        // Añadir los trabajadores al ListView
         for (Trabajador t : ListaTrabajadores) {
             listViewTrabajadores.getItems().add(t.getNombre());
             System.out.println(t.getNombre() + " Ha sido añadido a listViewTrabajadores");
-
         }
     }
 
+
     @FXML
     public void initialize() {
-
+        clickrefrescar();
+        eliminarTrabajador();
         listViewTrabajadores.setOnMouseClicked(event -> {
 
+            eliminarTrabajador();
             int indiceSeleccionado = listViewTrabajadores.getSelectionModel().getSelectedIndex();
 
 
@@ -194,14 +206,15 @@ public class Controlador {
 
                 if (resultado.isPresent() && resultado.get() == buttonTypeSi) {
                     MYSQL.eliminarTrabajador(trabajadorSeleccionado);
-                    confirmarEliminacion();
+
+                    ConfirmarDelete();
                 }
             }
         });
     }
 
 
-    private void confirmarEliminacion() {
+    private void ConfirmarDelete() {
 
         int indiceSeleccionado = listViewTrabajadores.getSelectionModel().getSelectedIndex();
 
@@ -251,7 +264,7 @@ public class Controlador {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("modificar.fxml"));
                 Parent root = loader.load();
 
-                Cambiar modificarController = loader.getController();
+                Modificar modificarController = loader.getController();
                 modificarController.init(trabajadorSeleccionado);
 
                 Stage stage = new Stage();

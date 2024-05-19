@@ -12,9 +12,12 @@ public class Vista extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Vista.class.getResource("vistatrabajadores.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        stage.setTitle("TrabajadorApp");
+        stage.setTitle("Gestión de Trabajadores");
+        stage.setResizable(false);
+        stage.setMaximized(false);
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void main(String[] args) {

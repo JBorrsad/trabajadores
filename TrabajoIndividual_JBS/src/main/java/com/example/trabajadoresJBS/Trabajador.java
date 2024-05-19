@@ -3,20 +3,21 @@ package com.example.trabajadoresJBS;
 import java.time.LocalDate;
 
 public class Trabajador {
+    private static int contadorId = 0;
 
     private String nombre;
     private String puesto;
     private int salario;
     private LocalDate fechaAlta;
-    private String id;
+    private int id;
 
-    public Trabajador(String nombre, String puesto, int salario) {
+    public Trabajador(String nombre, String puesto, int salario, LocalDate fechaAlta) {
         this.nombre = nombre;
         this.puesto = puesto;
         this.salario = salario;
-        this.id = nombre.toString() + puesto.toString() + salario;
+        this.fechaAlta = fechaAlta;
+        this.id = ++contadorId;
     }
-
 
     public String getNombre() {
         return nombre;
@@ -50,11 +51,11 @@ public class Trabajador {
         this.fechaAlta = fechaAlta;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 }
