@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.trabajadoresJBS.Controlador">
+    <children>
+        <Label layoutX="457.0" layoutY="14.0" text="Hecho por Juan Borrás">
+         <font>
+            <Font name="Inter Regular" size="12.0" />
+         </font></Label>
+        <TabPane layoutX="-1.0" layoutY="40.0" prefHeight="361.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Añadir Empleado">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="355.0" prefWidth="600.0" style="-fx-background-color: white;">
+                            <children>
+                                <TextField fx:id="txtFieldNombre" layoutX="28.0" layoutY="47.0" prefHeight="31.0" prefWidth="160.0" />
+                                <Label alignment="CENTER" layoutX="15.0" layoutY="14.0" prefHeight="25.0" prefWidth="106.0" text="Nombre" textOverrun="CLIP">
+                                    <font>
+                                        <Font name="Inter Regular" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label alignment="CENTER" layoutX="18.0" layoutY="85.0" prefHeight="24.0" prefWidth="101.0" text="Puesto">
+                                    <font>
+                                        <Font name="Inter Regular" size="12.0" />
+                                    </font>
+                                </Label>
+                                <ComboBox fx:id="Puesto" layoutX="29.0" layoutY="115.0" prefHeight="29.0" prefWidth="157.0">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="Scada Manager" />
+                                            <String fx:value="Sales Manager" />
+                                            <String fx:value="Product Owner" />
+                                            <String fx:value="Product Manager" />
+                                            <String fx:value="Analyst Programmer" />
+                                            <String fx:value="Junior Programmer" />
+                                        </FXCollections>
+                                    </items>
+                                </ComboBox>
+                                <Label alignment="CENTER" layoutX="19.0" layoutY="153.0" prefHeight="26.0" prefWidth="99.0" text="Salario">
+                                    <font>
+                                        <Font name="Inter Regular" size="12.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="FieldtextSalario" layoutX="33.0" layoutY="188.0" prefHeight="32.0" prefWidth="154.0" />
+                                <Button fx:id="añadirEmpleado" layoutX="56.0" layoutY="267.0" mnemonicParsing="false" onAction="#añadirEmpleado" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: orange; -fx-border-color: black; -fx-background-radius: 5px; -fx-border-radius: 5px;" text="Insertar">
+                                    <Font name="Inter Regular" size="12.0" />
+                                </Button>
+
+                                <ImageView fitHeight="101.0" fitWidth="244.0" layoutX="300.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../IMG/logo_bueno_trans.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Consultar">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
+                            <children>
+                                <ListView fx:id="listViewTrabajadores" layoutX="67.0" layoutY="25.0" onEditStart="#clickrefrescar" prefHeight="260.0" prefWidth="212.0" style="-fx-background-color: white;" />
+                                <Label layoutX="382.0" layoutY="17.0" prefHeight="17.0" prefWidth="22.0" text="ID:">
+                                    <font>
+                                        <Font name="Inter Regular" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="353.0" layoutY="62.0" text="Nombre:">
+                                    <font>
+                                        <Font name="Inter Regular" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="353.0" layoutY="114.0" text="Puesto:">
+                                    <font>
+                                        <Font name="Inter Regular" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="357.0" layoutY="158.0" text="Sueldo:">
+                                    <font>
+                                        <Font name="Inter Regular" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="316.0" layoutY="207.0" text="Fecha de Alta:">
+                                    <font>
+                                        <Font name="Inter Regular" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Button fx:id="ButtonRefrescar" ellipsisString="" layoutX="14.0" layoutY="35.0" mnemonicParsing="false" onAction="#clickrefrescar" prefHeight="30.0" prefWidth="33.0" text="↺">
+                                    <font>
+                                        <Font name="Inter Regular" size="14.0" />
+                                    </font>
+                                </Button>
+                                <Button fx:id="buttonModificar" layoutX="335.0" layoutY="272.0" mnemonicParsing="false" onAction="#modificarButton" prefHeight="25.0" prefWidth="71.0" text="Editar">
+                                    <font>
+                                        <Font name="Inter Regular" size="12.0" />
+                                    </font>
+                                </Button>
+                                <Label layoutX="450.0" layoutY="83.0" prefHeight="28.0" prefWidth="98.0" style="-fx-background-color: LightGrey;" />
+                                <Label layoutX="450.0" layoutY="130.0" prefHeight="28.0" prefWidth="98.0" style="-fx-background-color: LightGrey;" />
+                                <Label layoutX="450.0" layoutY="175.0" prefHeight="28.0" prefWidth="98.0" style="-fx-background-color: LightGrey;" />
+                                <Label layoutX="450.0" layoutY="36.0" prefHeight="28.0" prefWidth="98.0" style="-fx-background-color: LightGrey;" />
+                                <Button fx:id="buttonEliminar" layoutX="463.0" layoutY="272.0" mnemonicParsing="false" onAction="#eliminarTrabajador" prefHeight="25.0" prefWidth="71.0" text="Eliminar" textFill="RED" textOverrun="CLIP">
+                                    <font>
+                                        <Font name="Inter Semi Bold" size="12.0" />
+                                    </font>
+                                </Button>
+                                <Label fx:id="ConsultarNombre" layoutX="450.0" layoutY="58.0" prefHeight="25.0" prefWidth="98.0" style="-fx-background-color: LightGrey;" />
+                                <Label fx:id="ConsultarID" layoutX="450.0" layoutY="13.0" prefHeight="24.0" prefWidth="98.0" style="-fx-background-color: LightGrey;" />
+                                <Label fx:id="ConsultarPuesto" layoutX="450.0" layoutY="110.0" prefHeight="25.0" prefWidth="98.0" style="-fx-background-color: LightGrey;" />
+                                <Label fx:id="ConsultarSueldo" layoutX="450.0" layoutY="155.0" prefHeight="23.0" prefWidth="98.0" style="-fx-background-color: LightGrey;" />
+                                <Label fx:id="ConsultarFecha" layoutX="450.0" layoutY="201.0" prefHeight="27.0" prefWidth="98.0" style="-fx-background-color: LightGrey;" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</Pane>
